@@ -227,6 +227,9 @@
           <artifactId>cargo-maven3-plugin</artifactId>
           <version>${cargo-maven3-plugin.version}</version>
           <configuration>
+            <properties>
+		<cargo.servlet.port>9095</cargo.servlet.port>
+	     </properties>    
             <container>
               <containerId>${cargo.maven.containerId}</containerId>
               <zipUrlInstaller>
