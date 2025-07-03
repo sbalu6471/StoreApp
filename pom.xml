@@ -333,6 +333,7 @@
       <properties>
         <tomcat.major-version>9</tomcat.major-version>
         <tomcat.version>9.0.70</tomcat.version>
+        <cargo.servlet.port>9090</cargo.servlet.port>
       </properties>
     </profile>
     <profile>
