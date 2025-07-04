@@ -14,14 +14,31 @@
 #    limitations under the License.
 #
 
-FROM maven:3.9.6-openjdk-17
+# ----------------------------
+# Stage 1: Build using Maven
+# ----------------------------
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-WORKDIR /usr/src/myapp
+# Set working directory inside the container
+WORKDIR /usr/src/app
 
+# Copy all project files into the container
 COPY . .
 
-RUN mvn clean package
+# Package the application without running tests
+RUN mvn clean package -DskipTests
 
-CMD ["mvn", "cargo:run", "-P", "tomcat90"]
 
+# ----------------------------
+# Stage 2: Run the built app
+# ----------------------------
+FROM openjdk:17.0.2
 
+# Set working directory for runtime container
+WORKDIR /app
+
+# Copy only the WAR file from the builder stage
+COPY --from=builder /usr/src/app/target/*.war /app/app.war
+
+# Set the default command to run the app
+CMD ["java", "-jar", "/app/app.war"]
