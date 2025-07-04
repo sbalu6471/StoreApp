@@ -27,7 +27,7 @@
   </parent>
 
   <groupId>org.mybatis</groupId>
-  <artifactId>jpetstore</artifactId>
+  <artifactId>maven-wrapper</artifactId>
   <version>6.1.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
