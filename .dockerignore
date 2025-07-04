@@ -1,5 +1,5 @@
-target
-.git
+target/
+.git/
 *.log
 *.iml
 .idea
