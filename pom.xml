@@ -189,7 +189,7 @@
   </dependencies>
 
   <build>
-    <finalName>jpetstore</finalName>
+    <finalName>maven-wrapper</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
