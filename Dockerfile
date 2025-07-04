@@ -14,24 +14,14 @@
 #    limitations under the License.
 #
 
-FROM openjdk:17.0.2
+FROM maven:3.9.6-eclipse-temurin-17
 
 WORKDIR /usr/src/myapp
 
-# Step 1: Copy mvnw and make it executable
-COPY mvnw .
-RUN chmod +x mvnw
-
-# Step 2: Copy wrapper directory
-COPY .mvn .mvn
-
-# Step 3: Copy remaining project
 COPY . .
 
-# Step 4: Build
-RUN ./mvnw clean package
+RUN mvn clean package
 
-# Step 5: Run
-CMD ["./mvnw", "cargo:run", "-P", "tomcat90"]
+CMD ["mvn", "cargo:run", "-P", "tomcat90"]
 
 
