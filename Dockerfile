@@ -14,31 +14,22 @@
 #    limitations under the License.
 #
 
-# ----------------------------
-# Stage 1: Build using Maven
-# ----------------------------
+# ----------- STAGE 1: Build WAR using Maven -----------
 FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-# Set working directory inside the container
 WORKDIR /usr/src/app
-
-# Copy all project files into the container
 COPY . .
 
-# Package the application without running tests
+# Build WAR without tests
 RUN mvn clean package -DskipTests
 
 
-# ----------------------------
-# Stage 2: Run the built app
-# ----------------------------
+# ----------- STAGE 2: Run the App with Java -----------
 FROM openjdk:17.0.2
 
-# Set working directory for runtime container
 WORKDIR /app
 
-# Copy only the WAR file from the builder stage
+# Copy WAR file from builder stage
 COPY --from=builder /usr/src/app/target/*.war /app/app.war
 
-# Set the default command to run the app
 CMD ["java", "-jar", "/app/app.war"]
