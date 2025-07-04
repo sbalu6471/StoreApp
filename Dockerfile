@@ -15,10 +15,20 @@
 #
 
 FROM openjdk:17.0.2
-COPY . /usr/src/myapp
+
+# Set working directory
 WORKDIR /usr/src/myapp
+
+# Copy and fix mvnw first
+COPY mvnw .
 RUN chmod +x mvnw
+
+# Now copy the rest of the project
 COPY . .
+
+# Build the app
 RUN ./mvnw clean package
-CMD ./mvnw cargo:run -P tomcat90
-# CMD ["./mvnw", "cargo:run", "-P", "tomcat90"]
+
+# Run the app using Maven + Cargo
+CMD ["./mvnw", "cargo:run", "-P", "tomcat90"]
+
