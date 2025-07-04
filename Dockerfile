@@ -16,24 +16,22 @@
 
 FROM openjdk:17.0.2
 
-# FROM maven:3.9.6-eclipse-temurin-17
-
-# Set working directory
 WORKDIR /usr/src/myapp
 
-# Copy and fix mvnw first
+# Step 1: Copy mvnw and make it executable
 COPY mvnw .
 RUN chmod +x mvnw
 
-# Copy wrapper config files before bulk copy
+# Step 2: Copy wrapper directory
 COPY .mvn .mvn
 
-# Now copy the rest of the project
+# Step 3: Copy remaining project
 COPY . .
 
-# Build the app
+# Step 4: Build
 RUN ./mvnw clean package
 
-# Run the app using Maven + Cargo
+# Step 5: Run
 CMD ["./mvnw", "cargo:run", "-P", "tomcat90"]
+
 
