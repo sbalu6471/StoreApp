@@ -1,1 +1,6 @@
-mvnw
+target
+.git
+*.log
+*.iml
+.idea
+# mvnw
