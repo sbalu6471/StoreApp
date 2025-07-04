@@ -16,12 +16,17 @@
 
 FROM openjdk:17.0.2
 
+# FROM maven:3.9.6-eclipse-temurin-17
+
 # Set working directory
 WORKDIR /usr/src/myapp
 
 # Copy and fix mvnw first
 COPY mvnw .
 RUN chmod +x mvnw
+
+# Copy wrapper config files before bulk copy
+COPY .mvn .mvn
 
 # Now copy the rest of the project
 COPY . .
