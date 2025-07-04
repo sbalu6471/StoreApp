@@ -8,7 +8,7 @@
         update_cache: yes   
 
     - name: Build Docker Image
-      command: docker build -t storeappmain
+      command: docker build -t storeappmain .
       args:
         chdir: /var/lib/jenkins/workspace/storeappmain
 
